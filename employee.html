@@ -1,0 +1,192 @@
+<html>
+   
+   <head>
+      <title>angular Time sheet</title>
+      <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+      
+      <style>
+         .abc th{
+            background: #aaa14c;
+         }
+         table, th , td {
+            border: 2px solid grey;
+            border-collapse: collapse
+            padding: 6px;
+         }
+         
+         table tr:nth-child(odd) {
+            background-color: #f2f2f2;
+         }
+         
+         table tr:nth-child(even) {
+            background-color: #ffffff;
+         }
+      </style>
+      
+   </head>
+   <body>
+      <h1 style="color:blue;">TIME SHEET</h1>
+      <div ng-app = "mainApp" ng-controller = "employeeController">
+         
+         <table border = "0">
+            <tr>
+               <td colspan="2">Enter first name:</td>
+               <td ><input type = "text" ng-model = "student.firstName"></td>
+            </tr>
+            
+            <tr>
+               <td colspan="2">Enter last name: </td>
+               <td >
+                  <input type = "text" ng-model = "student.lastName">
+               </td>
+            </tr>
+            
+            <tr>
+               <td colspan="2">Name: </td>
+               <td>{{student.fullName()}}</td>
+            </tr>
+            <tr>
+               <td colspan="2">hours: </td>
+               <td>{{student.total_Week_hours()}}</td>
+            </tr>
+            
+            <tr>
+               <td>PROJECT Name<select ng-model="selectedName">
+<option ng-repeat="x in names" value="{{x}}">{{x}}</option>
+</select>
+               
+               </td>
+
+               <td>PROJECT Name<select ng-model="selectedName">
+<option ng-repeat="x in tasks" value="{{x}}">{{x}}</option>
+</select>
+               
+               </td>
+
+
+               <td>
+                  <table>
+                     
+                     <tr class="abc">
+                        <th>sun</th>
+                        <th>mon </th>
+                        <th>tue</th>
+                        <th>wed</th>
+                        <th>thu</th>
+                        <th>fri</th>
+                        <th>sat</th>
+                        
+                  <th>total Week hours</th>
+                     </tr><tr>
+                        <th><input type = "text" ng-model = "student1.sun" ></th></th>
+                        <th><input type = "text" ng-model = "student1.mon" ></th>
+                        <th><input type = "text" ng-model = "student1.tue" ></th>
+                        <th><input type = "text" ng-model = "student1.wed" ></th>
+                        <th><input type = "text" ng-model = "student1.thu" ></th>
+                        <th><input type = "text" ng-model = "student1.fri" ></th>
+                        <th><input type = "text" ng-model = "student1.sat" > </th>
+                        <th>{{student1.total_Week_hours1()}}</th>
+                        
+                     </tr><tr>
+                        <th><input type = "text" ng-model = "student.sun"></th>
+                        <th><input type = "text" ng-model = "student.mon"></th>
+                        <th><input type = "text" ng-model = "student.tue"></th>
+                        <th><input type = "text" ng-model = "student.wed"></th>
+                        <th><input type = "text" ng-model = "student.thu" ></th>
+                        <th><input type = "text" ng-model = "student.fri"></th>
+                        <th><input type = "text" ng-model = "student.sat" ></th>
+                        <th>{{student.total_Week_hours()}}</th>
+                        
+                     </tr>
+              
+                  </table>
+               </td>
+          
+            </tr>
+         
+      </div>
+      
+         </table>
+         <br>
+         <table border = "70">
+
+            <tr>
+               <td>Comment:</td>
+               <td><textarea rows="4" cols="100" maxlength="500"></textarea>
+               <br>
+               <button ng-click="submit(myForm)" ng-disabled="myForm.$pristine">
+ {{myForm.$pristine?buttonText:'submit'}}
+</button>
+               </td>
+            </tr>
+            </table>
+            <br>
+            <table border = "70">
+
+            <tr>
+               
+               <button type="submit" value="Submit">Submit</button>
+<button type="reset" value="Reset">Reset</button>
+            </tr>
+            </table>
+
+      <script>
+      var mainApp = angular.module("mainApp", []);
+
+         mainApp.controller('employeeController', function($scope) {
+            $scope.names = ["ETSDEV", "ETSTEST", "ESTSPROD","ESTDR"," "];
+
+            $scope.task=function(){
+               var selectedproj=$scope.selectedName;
+               if(selectedproj=="ETSDEV"){
+
+               }
+            };
+
+              $scope.student = {
+               firstName: "",
+               lastName: "",
+               sun:"holiday",
+               mon:"0",
+               tue:"0",
+               wed:"0",
+               thu:"0",
+               fri:"0",
+               sat:"0",
+
+               fullName: function() {
+                  var studentObject;
+                  studentObject = $scope.student;
+                  return studentObject.firstName + " " + studentObject.lastName;
+               },
+                total_Week_hours: function() {
+                  var employeeObject;
+                  employeeObject = $scope.student;
+
+                  return parseInt(employeeObject.mon) + parseInt(employeeObject.tue)+parseInt(employeeObject.wed)+parseInt(employeeObject.thu)+parseInt(employeeObject.fri)+parseInt(employeeObject.sat);;
+               }
+            };
+
+            $scope.student1 = {
+              
+               sun:"holiday",
+               mon:"0",
+               tue:"0",
+               wed:"0",
+               thu:"0",
+               fri:"0",
+               sat:"0",
+
+               
+                total_Week_hours1: function() {
+                  var employeeObject;
+                  employeeObject = $scope.student1;
+
+                  return parseInt(employeeObject.mon) + parseInt(employeeObject.tue)+parseInt(employeeObject.wed)+parseInt(employeeObject.thu)+parseInt(employeeObject.fri)+parseInt(employeeObject.sat);;
+               }
+            };
+         });
+      </script>
+      
+   </body>
+</html>
